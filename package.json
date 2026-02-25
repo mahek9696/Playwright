@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "iframe": "playwright test Frames.spec.js",
+    "enter": "playwright test pressEnter.spec.js",
+    "gui": "playwright test GUI.spec.js",
+    "right":"playwright test rightComponent.spec.js",
+    "login":"playwright test SauceLogin.spec.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
