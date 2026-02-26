@@ -12,29 +12,49 @@ test("has title", async ({ page }) => {
   await expect(page).toHaveTitle("Automation Testing Practice");
   // await expect(page.getByRole('heading',{name : 'Automation Testing Practice'})).toBeVisible();
 
-  await page.getByPlaceholder("Enter Name").pressSequentially("Test Name");
+  await page.getByPlaceholder("Enter Name").fill("Test Name");
   await page
     .getByPlaceholder("Enter EMail")
-    .pressSequentially("test123@mail.com");
-  await page.getByPlaceholder("Enter Phone").pressSequentially("1111111111");
+    .fill("test123@mail.com");
+  await page.getByPlaceholder("Enter Phone").fill("1111111111");
 
   await page
     .getByRole("textbox", { name: "Address:" })
     .type("Some where on the globe ! ");
 
-  const gender = ["Male", "Female"];
-
   await page.getByRole("radio", { name: "Male", exact: true }).check();
   expect(page.getByRole("radio", { name: "Male", exact: true })).toBeChecked();
+  await page.getByRole('radio',{name:'Female'}).check();
+  await expect(page.getByRole("radio", { name: "Male", exact: true })).not.toBeChecked();
+  await expect(page.getByRole("radio", { name: "Female"})).toBeChecked();
 
-  await page.getByRole("checkbox", { name: "Sunday" }).check();
+  await page.getByRole("checkbox", { name: 'Sunday' }).check();
   await expect(page.getByRole("checkbox", { name: "Sunday" })).toBeChecked();
 
-  await page.locator("#country").selectOption({ label: "United States" });
+  // const days = [
+  //   "Sunday",
+  //   "Monday",
+  //   "Tuesday",
+  //   "Wednesday",
+  //   "Thursday",
+  //   "Friday",
+  //   "Saturday",
+  // ];
+  // for (let day of days) {
+  //   // await page.pause();
+  //   await page.getByRole("checkbox", { name: day }).check();
+  //   await expect(page.getByRole("checkbox", { name: day })).toBeChecked();
+  // }
+
+  // await page.locator("#country").selectOption({ label: "United States" });
+  await page.locator("#country").selectOption("usa");//it target on the value 
+  await expect(page.locator('#country').selectOption("usa")).toBeTruthy();
 
   await page.locator("#colors").selectOption(["Red", "Blue"]);
+  await expect(page.locator('#colors').selectOption(["Red", "Blue"])).toBeTruthy();
 
-  await page.locator("#animals").selectOption({ label: "Cat" });
+  await page.locator("#animals").selectOption({ label: "Cat" });//it target the visible text
+  await expect(page.locator('#colors').selectOption(["Red", "Blue"])).toBeTruthy();
 
   // First date picker.
   const date1 = page
@@ -56,7 +76,7 @@ test("has title", async ({ page }) => {
 
   // await page.pause();
   // Fourth date picker.
-  await page.getByPlaceholder("Start Date").fill("2026-02-22");
+  await page.getByPlaceholder("Start Date").fill("2026-02-22"); //we try to fill the format dd-mm-yyyy but it declare has a date and HTML follow yyyy-mm-dd
 
   // Fifth date picker.
   await page.getByPlaceholder("End Date").fill("2026-02-22");

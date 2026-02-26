@@ -8,7 +8,8 @@
     "enter": "playwright test pressEnter.spec.js",
     "gui": "playwright test GUI.spec.js",
     "right":"playwright test rightComponent.spec.js",
-    "login":"playwright test SauceLogin.spec.js"
+    "login":"playwright test SauceLogin.spec.js",
+    "drop-down":"playwright test drop-down.spec.js"
   },
   "keywords": [],
   "author": "",
